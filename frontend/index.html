@@ -1,0 +1,276 @@
+<html>
+
+    <head>
+
+        <link href='estilo.css' rel="stylesheet" >
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    </head>
+    
+    <body>
+        
+
+        <h5>FORMULARIO DE DATOS PERSONALES</h5>
+        <form >
+        <div class="col-12">
+                <div class="row form-group ">
+                <div class="col-4 "> 
+                    <label class="fom-label" for="pais" >Pais: * </label>
+                    <select name="pais" class=" form-control" id="pais" onChange="comp_tipo()">
+                        <option value="esp">España</option>
+                        <option value="fr">Francia</option>
+                        <option value="uy">Uruguay</option>
+                        <option value="ar">Argentina</option>
+                        <option value="br">Brasil</option>
+                    </select>
+                </div>
+                <div class="col-4">            
+                    <label class=" fom-label" for="tipo" >Tipo de persona: * </label>
+                    <select name="tipo"  class="form-control " id="tipo" onChange="comp_tipo()">
+                        <option value="fisica">Física</option>
+                        <option value"juridica">Jurídica</option>
+                    </select>
+                </div>
+            </div>
+                <div class="row form-group ">
+                <div class="col-4"> 
+                    <label class=" fom-label nombre_persona" for="nombre" id="etq_nombre">Nombre: * </label>
+                    <input class=" form-control " type="text" name="nombre" id="persona_nombre" onchange="comp_nombre()" required >
+                    <span id="nombre_error" class="error">Este campo no es correcto</span>
+                </div>
+                <div class="col-4">
+                    <label class=" fom-label" for="apellidos" id="etq_apellidos" >Apellidos: * </label>
+                    <input class=" form-control" type="text" name="apellidos" id="persona_apellidos" onchange="comp_ape()" required >
+                    <span id="ape_error" class="error">Este campo no es correcto</span>
+                </div>
+            </div>
+                <div class="row form-group ">
+                <div class="col-12"> 
+                <label class=" fom-label" for="nombre_sociedad" >Nombre de la sociedad: * </label>
+                <input class=" form-control" type="text" name="nombre_sociedad" id="sociedad" onchange="comp_sociedad()" required >
+                <span id="sociedad_error" class="error">Este campo no es correcto</span>
+                </div>
+            </div>
+            <p class="text-center"> Documentación necesaria:  </p>
+                <div class="row form-group ">
+                    <div class="col-3">            
+                        <label  class=" fom-label" for="documento" id="cif"> CIF: * </label>
+                        <input class="form-control" type="text" name="documento" id="doc_cif" onChange="comp_cif()" required >
+                        <span id="cif_error" class="error">Este campo no es correcto</span>
+                    </div>
+                    <div class="col-3">
+                        <label class="form-label" for="documento" id="dni"> DNI: * </label>
+                        <input class=" form-control" type="text" name="documento" id="doc_dni" onChange="comp_dni()" required >
+                        <span id="dni_error" class="error">Este campo no es correcto</span>
+                    </div>
+                    <div class="col-3">
+                        <label class="form-label" for="documento" id="nie"> NIE: * </label>
+                        <input class="form-control" type="text" name="documento"  id="doc_nie" onChange="comp_nie()" required >
+                        <span id="nie_error" class="error">Este campo no es correcto</span>
+                    </div>
+                    <div class="col-3">
+                        <label class="form-label" for="documento" id="pasaporte"> Pasaporte: * </label>
+                        <input class="form-control" type="text" name="documento" id="doc_pasaporte" required onchange="comp_pasaporte()" >
+                        <span id="pasaporte_error" class="error">Este campo no es correcto</span>
+                    </div>
+            </div>
+            
+            <p class="text-center"> Dirección:  </p>
+    
+            <div class="row form-group ">
+                    <label class=" form-label" for="direccion" >Dirección: * </label>
+                    <input class=" form-control" type="text" name="direccion" id="direccion" onChange="comp_direccion()" required >
+                    <span id="direccion_error" class="error">Este campo no es correcto</span>
+            </div>
+                <div class="row form-group">
+                    <label class=" form-label" for="cp" >Código postal: * </label>
+                    <input class=" form-control" type="number" maxlength="4" name="cp" id="cp" onchange="comp_cp()" required >
+                    <span id="cp_error" class="error">Este campo no es correcto</span>
+                </div>
+           
+           <input class="btn btn-secondary w-100" type="submit" value="Enviar">
+    
+        </div>
+        </form>
+                
+<script>
+    
+    function comp_tipo(){
+        let pais = document.getElementById("pais").value;
+        let tipo = document.getElementById("tipo").value;
+        if( tipo == "fisica" ){
+            document.getElementById("doc_pasaporte").removeAttribute("disabled","");
+            document.getElementById("persona_nombre").removeAttribute("disabled", "");
+            document.getElementById("persona_apellidos").removeAttribute("disabled", "");
+            document.getElementById("sociedad").setAttribute("disabled","disabled");
+            document.getElementById("doc_cif").setAttribute("disabled","disabled");
+            //quito texto
+            document.getElementById("sociedad").value="";
+            document.getElementById("doc_cif").value="";
+            document.getElementById("sociedad_error").style.display="none";
+            document.getElementById("cif_error").style.display="none";
+
+            if ( pais=="esp"){
+                document.getElementById("doc_nie").setAttribute("disabled","disabled");
+                document.getElementById("doc_dni").removeAttribute("disabled", "");
+                //quito texto 
+                document.getElementById("doc_nie").value="";
+                document.getElementById("nie_error").style.display="none";
+            } else{
+                document.getElementById("doc_dni").value="";
+                document.getElementById("dni_error").style.display="none";
+                document.getElementById("doc_dni").setAttribute("disabled","disabled");
+                document.getElementById("doc_nie").removeAttribute("disabled", "");
+            }
+        } else {
+            //quitar texto y span 
+            document.getElementById("persona_nombre").value="";
+            document.getElementById("persona_apellidos").value="";
+            document.getElementById("doc_dni").value="";
+            document.getElementById("doc_nie").value="";
+            document.getElementById("doc_pasaporte").value="";
+            document.getElementById("nombre_error").style.display="none";
+            document.getElementById("ape_error").style.display="none";
+            document.getElementById("dni_error").style.display="none";
+            document.getElementById("nie_error").style.display="none";
+            document.getElementById("pasaporte_error").style.display="none";
+          //
+            document.getElementById("sociedad").removeAttribute("disabled", "");
+            document.getElementById("doc_cif").removeAttribute("disabled", "");
+            document.getElementById("persona_nombre").setAttribute("disabled","disabled");
+            document.getElementById("persona_apellidos").setAttribute("disabled","disabled");
+            document.getElementById("doc_dni").setAttribute("disabled","disabled");
+            document.getElementById("doc_nie").setAttribute("disabled", "disabled");
+            document.getElementById("doc_pasaporte").setAttribute("disabled", "disabled");
+        }
+
+    }
+$(document).ready(
+    comp_tipo()
+);
+
+function comp_direccion(){
+    let ok=false;
+    let nombre = document.getElementById('direccion').value;
+    let patron    =  /[a-zA-Z]{3,}/ ;
+    if (patron.test(nombre) ){
+        document.getElementById("direccion_error").style.display="none";
+        ok=true;
+    } else {
+        document.getElementById("direccion_error").style.display="block";
+   
+    return true; }
+}
+function comp_pasaporte(){
+    let ok=false;
+    let nombre = document.getElementById('doc_pasaporte').value;
+    let patron    =  /[a-zA-Z][0-9]{3,}/ ;
+    if (patron.test(nombre)){
+        document.getElementById("pasaporte_error").style.display="none";
+        ok=true;
+    } else {
+        document.getElementById("pasaporte_error").style.display="block";
+   
+    return true; }
+}
+function comp_nombre(){
+    let ok=false;
+    let nombre = document.getElementById('persona_nombre').value;
+    let patron    =  /[a-zA-Z]{3,}/ ;
+    if (patron.test(nombre)){
+        document.getElementById("nombre_error").style.display="none";
+        ok=true;
+    } else {
+        document.getElementById("nombre_error").style.display="block";
+   
+    return true; }
+}
+
+function comp_ape(){
+    let ok=false;
+    let nombre = document.getElementById('persona_apellidos').value;
+    let patron    =  /[a-zA-Z]{3,}/ ;
+    if (patron.test(nombre)){
+        document.getElementById("ape_error").style.display="none";
+        ok=true;
+    } else {
+        document.getElementById("ape_error").style.display="block";
+    return true;
+}
+}
+
+function comp_sociedad(){
+    let ok=false;
+    let nombre = document.getElementById('sociedad').value;
+    let patron    =  /[a-zA-Z]{3,}/ ;
+    if (patron.test(nombre)){
+        document.getElementById("sociedad_error").style.display="none";
+        ok=true;
+    } else {
+        document.getElementById("sociedad_error").style.display="block";
+    return true;
+}
+}
+
+function comp_dni(){
+    let ok=false;
+    let nombre = document.getElementById('doc_dni').value;
+    let patron    =  /[0-9]{8}[a-zA-z]{1}/ ;
+    if (patron.test(nombre)){
+        document.getElementById("dni_error").style.display="none";
+        ok=true;
+    } else {
+        document.getElementById("dni_error").style.display="block";
+    return true;
+}
+}
+
+function comp_nie(){
+let ok=false;
+let nombre = document.getElementById('doc_nie').value;
+let patron    =  /^[a-zA-Z]{1}[0-9]{7}[a-zA-Z]{1}/ ;
+if (patron.test(nombre)){
+    document.getElementById("nie_error").style.display="none";
+    ok=true;
+} else {
+    document.getElementById("nie_error").style.display="block";
+return true;
+}
+}
+function comp_cif(){
+let ok=false;
+let nombre = document.getElementById('doc_cif').value;
+let patron    =  /[a-zA-Z][0-9]{9}/ ;
+if (patron.test(nombre)){
+    document.getElementById("cif_error").style.display="none";
+    ok=true;
+} else {
+    document.getElementById("cif_error").style.display="block";
+return true;
+}
+}
+function comp_cp(){
+    let ok=false;
+    let nombre = document.getElementById('cp').value;
+    let patron    =  /[0-9]{4}/ ;
+    if (patron.test(nombre)){
+        document.getElementById("cp_error").style.display="none";
+        ok=true;
+    } else {
+        document.getElementById("cp_error").style.display="block";
+    return true;
+}
+}
+
+
+</script>
+
+
+
+
+
+    </body>
+
+</html>
