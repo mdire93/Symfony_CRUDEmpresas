@@ -1,4 +1,4 @@
-# Prueba técnica Atrinium v0.1
+# Prueba técnica v0.1
 
 # Base de Datos 
 Se debe importar el archivo **bdd_empresas.sql** en phpmyadmin (Este archivo esta guardado en la raiz) 
