@@ -79,7 +79,7 @@ return true; }
 function comp_pasaporte(){
 let ok=false;
 let nombre = document.getElementById('doc_pasaporte').value;
-let patron    =  /[a-zA-Z][0-9]{3,}/ ;
+let patron    =  /[a-zA-Z]{3,}/ ;
 if (patron.test(nombre)){
   document.getElementById("pasaporte_error").style.display="none";
   ok=true;
